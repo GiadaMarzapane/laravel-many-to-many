@@ -125,6 +125,26 @@
                     placeholder="Inserisci link..."> --}}
                 </div>
 
+                {{-- INPUT PER TECHNOLOGIES --}}
+                <div class="mb-4">
+                    <label for="localimg" class="form-label d-block">
+                        Scegli :
+                    </label>
+                    @foreach ($technologies as $element)
+                        <div class="form-check form-check-inline">
+                            <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="{{ $element->id }}"
+                            value="{{ $element->id }}"
+                            name="technologies[]">
+                            <label class="form-check-label" for="{{ $element->id }}">
+                                {{ $element->name }}
+                            </label>
+                        </div>
+                    @endforeach
+                </div>
+
                 {{-- --------------------FINE INPUT-------------------- --}}
 
                 <button type="submit" class="btn btn-success">Crea viaggio</button>

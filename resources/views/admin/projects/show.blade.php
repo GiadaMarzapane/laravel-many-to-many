@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid my-4">
     <div class="row justify-content-center">
-        <div class="col">
+        <div class="col-6">
             {{-- messaggio per post aggiunto correttamente --}}
             @if (session('status'))
                 <div class="alert alert-success">
@@ -38,10 +38,27 @@
             <p>
                 {{ $project->content }}
             </p>
-            <div class="mt-3 text-end">
+            <div class="mt-3 text-start">
                 <a class="btn btn-warning" href="{{ route('admin.projects.edit', $project->id) }}">
                 Modifica viaggio
                 </a>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="mt-5">
+                "Technologies: "
+                {{-- @if () --}}
+                <ul>
+                    
+                    @foreach ($technologies as $technology)
+                        @if ($technology->name)
+                            <li>{{ $technology->name }}</li>
+                        @else
+                        <p>Nessuna "technology" </p>
+                        @endif
+                    @endforeach
+                </ul>
+                {{-- @endif --}}
             </div>
         </div>
     </div>

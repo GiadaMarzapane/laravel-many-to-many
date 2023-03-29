@@ -40,7 +40,9 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        return view('admin.projects.show', compact('project'));
+        $technologies = $project->technologies;
+
+        return view('admin.projects.show', compact('project', 'technologies'));
     }
 
     /**
@@ -52,7 +54,9 @@ class ProjectController extends Controller
     {
         // recupero i miei types
         $types = Type::all();
-        return view('admin.projects.create', compact('types'));
+        $technologies = Technology::all();
+
+        return view('admin.projects.create', compact('types', 'technologies'));
     }
 
     /**
@@ -64,7 +68,7 @@ class ProjectController extends Controller
     public function store(StoreProjectRequest $request)
     {
         // dd($request->all());
-
+        
         $data = $request->validated();
 
         // creo variabile per lo slug del title
@@ -83,9 +87,14 @@ class ProjectController extends Controller
             'content'=> $data['content'],
             'date'=> $data['date'],
             'photo_link'=> $data['photo_link'],
-            'localimg' => $imgPath,
+            // 'localimg' => $imgPath,
             'type_id' =>$data['type_id']
         ]);
+        
+        foreach ($data['technologies'] as $technologyId) {
+            $newProject->technologies()->attach($technologyId);
+            
+        }
 
         return redirect()->route('admin.projects.show', $newProject->id)->with('status', 'Viaggio aggiunto con successo!');;
     }
