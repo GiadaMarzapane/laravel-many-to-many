@@ -4,10 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 
-use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+
+// Models
+use App\Models\Project;
 use App\Models\Type;
+use App\Models\Technology;
+
 // Helper
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -23,8 +27,9 @@ class ProjectController extends Controller
     {
         $projects = Project::all();
         $types = Type::all();
+        $technologies = Technology::all();
         
-        return view('admin.projects.index', compact(['projects', 'types']));
+        return view('admin.projects.index', compact(['projects', 'types', 'technologies']));
     }
 
     /**
