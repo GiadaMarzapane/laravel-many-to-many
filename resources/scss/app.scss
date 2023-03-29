@@ -1,0 +1,13 @@
+@import '~bootstrap/scss/bootstrap';
+img{
+    height: 300px;
+    width: 350px;
+    object-fit: cover;
+    object-position: center;
+}
+
+input::placeholder,
+textarea::placeholder,
+div.form-text{
+    font-size: 0.8rem;
+}
